@@ -1,0 +1,41 @@
+USE [Transaction]
+GO
+/****** Object:  StoredProcedure [dbo].[BMS_UpdateUser]    Script Date: 7/1/2020 2:27:59 PM ******/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[BMS_UpdateUser] 
+ 
+	
+	@UserID int ,
+    @Email	varchar(30),
+	@Address  varchar (30)
+	
+	
+AS    
+       
+BEGIN    
+SET NOCOUNT ON  
+  
+  IF @UserID is not NULL
+
+  BEGIN
+
+    IF @Email is not NULL
+	 BEGIN
+      UPDATE [dbo].[BMS_Users] set EMAIL = @EMAIL where UserID = @UserID;
+	 END 
+	 
+	 IF @Address is not NULL
+	 BEGIN
+      UPDATE [dbo].[BMS_Users] set Address = @Address where UserID = @UserID;
+	 END 
+
+
+  END
+  SET NOCOUNT OFF  
+  
+ END

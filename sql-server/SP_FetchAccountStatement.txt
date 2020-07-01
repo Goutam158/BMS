@@ -1,0 +1,35 @@
+USE [Transaction]
+GO
+/****** Object:  StoredProcedure [dbo].[BMS_FetchAccountStatement]    Script Date: 7/1/2020 2:27:59 PM ******/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[BMS_FetchAccountStatement] 
+ 
+	@FromDate Date ,
+	@ToDate Date ,
+	@UserID int 
+	
+	
+AS    
+       
+BEGIN    
+SET NOCOUNT ON  
+  
+  IF @UserID is not NULL
+
+  BEGIN
+
+    select * from [dbo].[BMS_Account_Details] 
+	  where UserID = @UserID and ( TransactionDate BETWEEN @FromDate AND @ToDate );
+
+  END
+  SET NOCOUNT OFF  
+  
+ END
+
+
+ 
