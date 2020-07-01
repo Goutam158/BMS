@@ -1,0 +1,38 @@
+USE [Transaction]
+GO
+ Object  StoredProcedure [dbo].[BMS_CreateUser]    Script Date 712020 22759 PM 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[BMS_CreateUser] 
+    
+  
+    @Name varchar(30) ,
+	@Password varchar(30) ,
+	@Email  varchar(30) ,
+	@PAN    varchar(30),
+	@Address  varchar(100)  ,
+	@DOB       DATE ,
+	@UserID int OUTPUT
+AS    
+       
+BEGIN    
+SET NOCOUNT ON  
+  
+  IF @Name is not NULL
+
+  BEGIN
+
+    insert into   [dbo].[BMS_Users] values (@Name,@Password,@Email,@PAN,@Address,@DOB);
+	
+	select @UserID = (select ID from [dbo].[BMS_Users]  where PAN = @PAN);
+
+  END
+  SET NOCOUNT OFF  
+  
+ END
+
+
+ 
