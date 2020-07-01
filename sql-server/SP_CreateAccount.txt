@@ -1,0 +1,40 @@
+USE [Transaction]
+GO
+/****** Object:  StoredProcedure [dbo].[BMS_CreateAccount]    Script Date: 7/1/2020 2:27:59 PM ******/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[BMS_CreateAccount] 
+  
+
+    @AccountNumber int  ,
+	@AccountBalance float (53) ,
+    @TransactionDesc varchar (100) ,
+	@TransactionType varchar (30),
+	@TransactionDate Date ,
+	@UserID int ,
+	@AccountID int OUTPUT
+	
+AS    
+       
+BEGIN    
+SET NOCOUNT ON  
+  
+  IF @AccountNumber is not NULL
+
+  BEGIN
+
+    insert into   [dbo].[BMS_Account_Details] values (@AccountNumber,@AccountBalance,@TransactionDesc,@TransactionType,@TransactionDate,@UserID);
+	
+	select @AccountID = (select ID from [dbo].[BMS_Account_Details]  where AccountNumber = @AccountNumber);
+
+  END
+  SET NOCOUNT OFF  
+  
+ END
+
+
+ 
